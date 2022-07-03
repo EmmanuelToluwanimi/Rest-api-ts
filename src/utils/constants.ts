@@ -1,7 +1,7 @@
 
 export const ROUTES = {
     HEALTHCHECK: '/healthcheck',
-    REGISTER: '/api/users',
+    REGISTER: '/api/user/register',
 }
 
 export const saltRounds = 10;

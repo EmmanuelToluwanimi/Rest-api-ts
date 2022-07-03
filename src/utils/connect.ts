@@ -7,6 +7,11 @@ async function connect() {
     const dbUri = config.get<string>("dbUri");
 
     try {
+
+        if(!dbUri) {
+            throw new Error("Provide a valid dbUri");
+        }
+
         await mongoose.connect(dbUri);
         logger.info("Connected to MongoDB");
 

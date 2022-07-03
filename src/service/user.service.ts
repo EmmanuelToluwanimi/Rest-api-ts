@@ -1,8 +1,8 @@
 import {DocumentDefinition} from 'mongoose';
-import User, {IUser} from '../models/user.model';
+import User from '../models/user.model';
+import { IUser } from '../interfaces';
 
 export async function createUser(input: DocumentDefinition<IUser>){
-
     try {
         return await User.create(input);
     } catch (error:any) {
