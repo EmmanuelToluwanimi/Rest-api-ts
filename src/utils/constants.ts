@@ -15,3 +15,8 @@ export const dbUri = ()=> {
         return 'mongodb://localhost:27017/rest-api-ts'
     }
 }
+export const publicKey = process.env.JWT_PUBLIC_KEY;
+export const privateKey = process.env.JWT_PRIVATE_KEY;
+
+export const accessTokenTtl = "15m";
+export const refreshTokenTtl = "30d";

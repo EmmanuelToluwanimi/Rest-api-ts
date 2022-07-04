@@ -9,3 +9,11 @@ export interface IUser extends mongoose.Document {
     comparePassword: (password:string) => Promise<boolean>;
 }
 
+export interface ISession extends mongoose.Document {
+    _id: mongoose.Schema.Types.ObjectId;
+    user: IUser["_id"];
+    valid: boolean;
+    userAgent: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
