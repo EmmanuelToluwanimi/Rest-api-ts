@@ -1,6 +1,11 @@
 import Session from "../models/session.model";
 import { FilterQuery, UpdateQuery } from 'mongoose'
 import {ISession} from '../interfaces'
+import { signJwt, verifyJwt } from "../utils/jwt.utils";
+import {get} from 'lodash'
+import { findUser } from "./user.service";
+import config from 'config';
+
 
 export async function createSession(userId: string, userAgent: string) {
     try {
@@ -29,4 +34,43 @@ export async function updateSessions(query: FilterQuery<ISession>, update: Updat
     } catch (error: any) {
         throw new Error(error.message);
     }
+}
+
+export async function reIssueAccessToken({refreshToken}:{refreshToken:string}) {
+
+    const {decoded} = verifyJwt(refreshToken);
+    const id = get(decoded, 'session') 
+
+    if(!decoded || !id) return "";
+
+    const session = await Session.findById(id);
+
+    if(!session || !session.valid) return "";
+
+    const user = await findUser({_id: session.user})
+
+    if(!user) return "";
+
+    // create an access token
+    const accessToken = signJwt(
+        {...user, session: session._id},
+        {expiresIn: config.get('accessTokenTtl')}
+    )
+
+    return accessToken;
+
+    // try {
+    //     const session = await Session.findOne({refreshToken});
+    //     if(!session) throw new Error('Invalid refresh token');
+
+    //     const user = await User.findById(session.user);
+    //     if(!user) throw new Error('Invalid user');
+
+    //     const accessToken = signJwt({...user, session: session._id}, {expiresIn: config.get('accessTokenTtl')});
+    //     const refreshToken = signJwt({...user, session: session._id}, {expiresIn: config.get('refreshTokenTtl')});
+
+    //     return {accessToken, refreshToken};
+    // } catch (error: any) {
+    //     throw new Error(error.message);
+    // }
 }
