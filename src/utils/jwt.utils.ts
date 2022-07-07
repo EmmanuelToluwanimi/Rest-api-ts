@@ -18,7 +18,7 @@ export function signJwt(
     });
 }
 
-export async function verifyJwt(token: string) {
+export function verifyJwt(token: string) {
     try {
         const decoded = jwt.verify(token, secretKey);
 
