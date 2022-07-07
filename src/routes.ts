@@ -3,7 +3,7 @@ import { createUserHandler } from './controller/user.controller';
 import { ROUTES } from './utils/constants';
 import validate from './middleware/validateResource';
 import { createUserSchema } from './schema/user.schema';
-import { createUserSessionHandler, getUserSessionHandler } from './controller/session.controller';
+import { createUserSessionHandler, getUserSessionHandler, deleteUserSessionHandler } from './controller/session.controller';
 import { createSessionSchema } from './schema/session.schema';
 import { requireUser } from './controller/requireUser';
 
@@ -20,8 +20,9 @@ function routes(app:Express) {
     app.post(REGISTER, validate(createUserSchema), createUserHandler);
 
     app.post(SESSIONS, validate(createSessionSchema), createUserSessionHandler);
-
     app.get(SESSIONS, requireUser, getUserSessionHandler);
+    app.delete(SESSIONS, requireUser, deleteUserSessionHandler);
+
     
 }
 
