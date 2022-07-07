@@ -1,22 +1,26 @@
 import jwt from 'jsonwebtoken';
 import config from 'config';
+import { algoType, convertFromBase64String } from './constants';
+
 
 const privateKey = config.get<string>('privateKey');
 const publicKey = config.get<string>('publicKey');
+const secretKey = config.get<string>('secretKey');
 
 export function signJwt(
     object: Object,
     options?: jwt.SignOptions | undefined
 ) {
-    return jwt.sign(object, privateKey, {
+    // console.log(privateKey);
+    return jwt.sign(object, secretKey, {
         ...(options && options),
-        algorithm: 'RS256',
+        algorithm: algoType,
     });
 }
 
 export async function verifyJwt(token: string) {
     try {
-        const decoded = jwt.verify(token, publicKey);
+        const decoded = jwt.verify(token, secretKey);
 
         return {
             valid: true,

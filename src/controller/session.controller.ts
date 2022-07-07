@@ -25,12 +25,18 @@ export async function createUserSessionHandler(req: Request, res: Response) {
         )
 
         // create a refresh token
+        const refreshToken = signJwt(
+            {...user, session: session._id},
+            {expiresIn: config.get('refreshTokenTtl')}
+        )
 
         // return access & refresh tokens
+        return res.send({accessToken, refreshToken});
 
 
 
     } catch (error:any) {
+        console.log(error)
         res.status(error.status||500).send(error.message);
     }
 

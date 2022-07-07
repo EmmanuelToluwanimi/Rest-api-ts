@@ -1,4 +1,4 @@
-import { saltRounds, port, dbUri, publicKey, privateKey, accessTokenTtl, refreshTokenTtl } from "../src/utils/constants"
+import { saltRounds, port, dbUri, publicKey, privateKey, accessTokenTtl, refreshTokenTtl, secretKey } from "../src/utils/constants"
 
 
 export default {
@@ -7,6 +7,7 @@ export default {
     saltRounds,
     publicKey,
     privateKey,
+    secretKey,
     accessTokenTtl,
     refreshTokenTtl
 }
