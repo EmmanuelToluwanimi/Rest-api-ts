@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import {customAlphabet} from 'nanoid'
+import {customAlphabet} from 'nanoid';
 import { IProduct } from "../interfaces";
 
 const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 10);

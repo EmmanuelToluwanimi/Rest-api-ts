@@ -4,6 +4,7 @@ export const ROUTES = {
     REGISTER: '/api/user/register',
     LOGIN: '/api/user/login',
     SESSIONS: '/api/sessions',
+    PRODUCTS: '/api/products'
 }
 
 export const saltRounds = 10;
