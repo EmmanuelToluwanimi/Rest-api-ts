@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import {customAlphabet} from 'nanoid';
+// import {customAlphabet} from 'nanoid';
 import { IProduct } from "../interfaces";
 
-const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 10);
+// const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 10);
 
 const productSchema = new mongoose.Schema({
     
@@ -10,7 +10,7 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        default: () => `product_${nanoid()}`
+        default: () => `product_${Math.floor(Math.random()*1000000)}`
     },
     title: {
         type: String,

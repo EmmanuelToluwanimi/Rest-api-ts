@@ -30,7 +30,7 @@ export async function updateProductHandler(req:Request<UpdateProductInput['param
             return res.status(404).send({message: 'Product not found'})
         }
 
-        if(product.user !== userId){
+        if(String(product.user) !== userId){
             return res.status(403).send({message: 'Sorry, you can not perform this action'})
         }
 
@@ -39,6 +39,7 @@ export async function updateProductHandler(req:Request<UpdateProductInput['param
         return res.send(updatedProduct);
 
     } catch(error: any){
+        console.log(error)
         return res.status(error.code || 500).send({error})
     }
 
@@ -54,7 +55,7 @@ export async function getProductHandler(req:Request<ReadProductInput['params']>,
             return res.status(404).send({message: 'Product not found'})
         }
  
-        return res.send();
+        return res.send(product);
 
     } catch(error: any){
         return res.status(error.code || 500).send({error})
@@ -74,7 +75,7 @@ export async function deleteProductHandler(req:Request<DeleteProductInput['param
             return res.status(404).send({message: 'Product not found'})
         }
 
-        if(product.user !== userId){
+        if(String(product.user) !== userId){
             return res.status(403).send({message: 'Sorry, you can not perform this action'})
         }
 

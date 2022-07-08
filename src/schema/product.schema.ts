@@ -31,7 +31,7 @@ export const createProductSchema = object({
 })
 
 export const updateProductSchema = object({
-    ...productPayload,
+    // ...productPayload,
     ...productParams
 })
 
