@@ -17,3 +17,13 @@ export interface ISession extends mongoose.Document {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export interface IProduct extends mongoose.Document {
+    user: IUser["_id"];
+    title: string;
+    description: string;
+    price: number;
+    image: string;
+    createdAt: Date;
+    updatedAt: Date;
+}

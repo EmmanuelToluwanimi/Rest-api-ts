@@ -59,18 +59,4 @@ export async function reIssueAccessToken({refreshToken}:{refreshToken:string}) {
 
     return accessToken;
 
-    // try {
-    //     const session = await Session.findOne({refreshToken});
-    //     if(!session) throw new Error('Invalid refresh token');
-
-    //     const user = await User.findById(session.user);
-    //     if(!user) throw new Error('Invalid user');
-
-    //     const accessToken = signJwt({...user, session: session._id}, {expiresIn: config.get('accessTokenTtl')});
-    //     const refreshToken = signJwt({...user, session: session._id}, {expiresIn: config.get('refreshTokenTtl')});
-
-    //     return {accessToken, refreshToken};
-    // } catch (error: any) {
-    //     throw new Error(error.message);
-    // }
 }

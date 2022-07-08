@@ -5,7 +5,7 @@ import validate from './middleware/validateResource';
 import { createUserSchema } from './schema/user.schema';
 import { createUserSessionHandler, getUserSessionHandler, deleteUserSessionHandler } from './controller/session.controller';
 import { createSessionSchema } from './schema/session.schema';
-import { requireUser } from './controller/requireUser';
+import { requireUser } from './middleware/requireUser';
 
 
 const {
